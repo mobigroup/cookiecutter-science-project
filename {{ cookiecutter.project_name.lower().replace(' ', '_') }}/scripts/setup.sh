@@ -3,7 +3,8 @@
 # I should probably implement some check if the creation was successful
 #curl -u '{{ cookiecutter.github_username }}' https://api.github.com/user/repos -d '{"name":"{{ cookiecutter.project_name.lower().replace(' ', '_') }}", "private":{{ cookiecutter.repo_private }}}'
 
-if [ "cookiecutter.repo_private" = "true" ]
+cd ..
+if [ "{{ cookiecutter.repo_private }}" = "true" ]
 then
     gh repo create {{ cookiecutter.project_name.lower().replace(' ', '_') }} --private --confirm
 else
@@ -11,7 +12,8 @@ else
 fi
 
 # Link local repository to git
-git init
+#git init
+cd {{ cookiecutter.project_name.lower().replace(' ', '_') }}
 git add *
 git add .gitignore .stickler.yml .travis.yml
 git commit -m 'first commit'
